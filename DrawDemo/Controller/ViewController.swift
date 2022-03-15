@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     }()
     
     
+    
+    
+    
     @objc func handleUndo(){
         canvas.undo()
     }
@@ -85,9 +88,17 @@ class ViewController: UIViewController {
     }
     
     
+    let arrowButton :UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Arrow", for: .normal)
+        btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        btn.addTarget(self, action: #selector(handleArrow), for: .touchUpInside)
+        return btn
+    }()
     
-    
-    
+    @objc func handleArrow(){
+        canvas.isArrow = !canvas.isArrow
+    }
     
     override func loadView() {
         self.view = canvas
@@ -107,6 +118,7 @@ class ViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [
             undoButton,
             clearButton,
+            arrowButton,
             colorsStackView,
             slider
         ])
